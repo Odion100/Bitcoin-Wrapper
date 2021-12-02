@@ -1,18 +1,18 @@
-const { App } = require("sht-tasks");
-const os = require("os");
-const bitcoind = require("bitcoind-rpc");
+const { Service } = require("sht-tasks");
 const route = "rpc";
 const port = 5300;
 const host = "159.223.150.143";
 
-console.log(os.hostname(), "test");
-App.ServerModule("BC", function () {
-  const BC = this;
-  BC.test = (data, cb) => {
-    console.log(data);
-    data.testPassed = true;
-    cb(null, data);
-  };
-});
+var RpcClient = require("bitcoind-rpc");
 
-App.startService({ route, port, host });
+var config = {
+  protocol: "http",
+  user: "odiferusmaximus",
+  pass: "OD+BusiIs100mil",
+  host: "127.0.0.1",
+  port: "8332",
+};
+const rpc = new RpcClient(config);
+
+Service.ServerModule("Bitcoin", Object.getPrototypeOf(rpc));
+Service.startService({ route, port, host });

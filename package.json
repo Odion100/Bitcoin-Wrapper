@@ -19,6 +19,6 @@
   "homepage": "https://github.com/Odion100/Bitcoin-Wrapper#readme",
   "dependencies": {
     "bitcoind-rpc": "^0.9.1",
-    "sht-tasks": "^2.4.8"
+    "sht-tasks": "^2.5.8"
   }
 }
