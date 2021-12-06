@@ -14,5 +14,17 @@ var config = {
 };
 const rpc = new RpcClient(config);
 
-Service.ServerModule("Bitcoin", Object.getPrototypeOf(rpc));
+const methods = Object.getOwnPropertyNames(Object.getPrototypeOf(rpc));
+const rpcModule = methods.reduce((mod, method) => {
+  mod[method] = () => rpc[method].bind(rpc);
+
+  return mod;
+}, {});
+
+Service.ServerModule("Bitcoin", rpcModule);
 Service.startService({ route, port, host });
+rpc.getRawMemPool(function (err, ret) {
+  if (err) {
+    console.error(err);
+  } else console.log(ret);
+});
