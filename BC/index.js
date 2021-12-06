@@ -10,14 +10,13 @@ var config = {
   user: "odiferusmaximus",
   pass: "OD+BusiIs100mil",
   host: "127.0.0.1",
-  port: "8332",
+  port: "18332",
 };
 const rpc = new RpcClient(config);
 
 const methods = Object.getOwnPropertyNames(Object.getPrototypeOf(rpc));
 const rpcModule = methods.reduce((mod, method) => {
   mod[method] = () => rpc[method].bind(rpc);
-
   return mod;
 }, {});
 
